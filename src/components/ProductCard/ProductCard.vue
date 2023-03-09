@@ -1,0 +1,143 @@
+<template>
+  <div
+    class="product__card"
+    v-for="product in products"
+    v-bind:key="product.id"
+  >
+    <div class="product__card-image">
+      <img :src="product.thumbnail" :alt="product.brand">
+    </div>
+    <div class="product__card-rating">
+      <Rating :max="5" :current="product.rating" />
+    </div>
+    <div class="product__card-info">
+      <p>Model: <span>{{product.title}}</span></p>
+      <p>Brand: <span>{{product.brand}}</span></p>
+    </div>
+    <div class="product__card-price">
+      <p class="sale">${{product.price}}</p>
+      <p>${{Math.floor(product.price - (product.price / 100 * product.sale))}}</p>
+    </div>
+    <button class="btn__card">
+      <i class="pi pi-shopping-cart" style="font-size: 1rem; color: #0156FF; margin-right: 7px;" />
+      Add To Cart
+    </button>
+    <button class="product__card-favorite">
+      <i class="pi pi-heart" style="font-size: 1rem" />
+    </button>
+  </div>
+</template>
+
+<script>
+import Rating from '@/components/Rating/Rating'
+export default {
+  name: 'ProductCard',
+  components: {
+    Rating
+  },
+  data () {
+    return {
+      products: [
+        {
+          id: 1,
+          thumbnail: 'https://i.dummyjson.com/data/products/1/1.jpg',
+          brand: 'Apple',
+          category: 'smartphones',
+          description: 'An apple mobile which is nothing like apple',
+          price: 549,
+          rating: 4.69,
+          stock: 94,
+          sale: 12.96,
+          title: 'iPhone 8'
+        }
+      ]
+    }
+  }
+}
+</script>
+
+<style scoped>
+.product__card {
+  width: 235px;
+  height: 320px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.14);
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  transition: height 0.3s;
+  position: relative;
+}
+.product__card-image {
+  display: flex;
+  justify-content: center;
+}
+.product__card-image img {
+  width: 75%;
+  height: 150px;
+  object-fit: contain;
+}
+.product__card-info p {
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.product__card-info p span {
+  font-weight: 800;
+}
+.product__card-price {
+  margin-top: 10px;
+  text-align: left;
+}
+.product__card-price p {
+  font-weight: 800;
+}
+.product__card-price .sale {
+  font-weight: 500;
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+.btn__card {
+  background: none;
+  outline: none;
+  border: 2px solid #0156FF;
+  border-radius: 50px;
+  padding: 8px 15px;
+  align-self: center;
+  display: flex;
+  opacity: 0;
+  justify-content: center;
+  width: 160px;
+  margin-top: 15px;
+  color: #0156FF;
+  font-weight: 700;
+  cursor: pointer;
+}
+.product__card:hover .btn__card {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+.product__card:hover {
+  height: 375px;
+  transition: all 0.3s ease-in-out;
+}
+.product__card-favorite {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  opacity: 0;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
+.product__card:hover .product__card-favorite {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+</style>
