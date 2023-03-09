@@ -12,10 +12,11 @@
     </div>
   </header>
   <router-view/>
+  <Footer />
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap');
 * {
   padding: 0;
   margin: 0;
@@ -26,6 +27,9 @@ body {
 }
 a {
   text-decoration: none;
+}
+li {
+  list-style: none;
 }
 header {
   width: 100%;
@@ -66,11 +70,13 @@ import 'primeicons/primeicons.css'
 import Logo from '@/components/Logo/Logo'
 import Search from '@/components/Search/Search'
 import User from '@/components/User/User'
+import Footer from '@/components/Footer/Footer'
 export default {
   components: {
     User,
     Search,
-    Logo
+    Logo,
+    Footer
   }
 }
 </script>

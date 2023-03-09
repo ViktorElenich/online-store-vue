@@ -79,7 +79,7 @@ export default {
 <style scoped>
 .slider__container {
   width: 100%;
-  height: calc(100vh - 128px);
+  height: calc(100vh - 80px);
   position: relative;
   overflow: hidden;
 }
