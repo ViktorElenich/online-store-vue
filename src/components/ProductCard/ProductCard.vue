@@ -1,6 +1,6 @@
 <template>
   <div
-    class="product__card"
+    class="product__card-list"
     v-for="product in products"
     v-bind:key="product.id"
   >
@@ -57,7 +57,64 @@ export default {
 </script>
 
 <style scoped>
-.product__card {
+.product__card-list {
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.14);
+  padding: 10px;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    'image info'
+    'rating price';
+  position: relative;
+  cursor: pointer;
+  max-width: 75rem;
+}
+.product__card-list .product__card-image {
+  grid-area: image;
+}
+.product__card-list .product__card-image img {
+  object-fit: cover;
+  width: 100%;
+}
+.product__card-list .product__card-rating {
+  grid-area: rating;
+  grid-column: 1 / span 2;
+}
+.product__card-list .product__card-info {
+  grid-area: info;
+  padding: 10px;
+}
+.product__card-list .product__card-info p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+}
+@media (max-width: 850px) {
+  .product__card-list .product__card-info p {
+    font-size: 1rem;
+  }
+}
+.product__card-list .product__card-price {
+  grid-area: price;
+  grid-row: 1 / span 2;
+  margin-top: 80px;
+  padding: 10px;
+  text-align: right;
+}
+.product__card-list .btn__card {
+  opacity: 1;
+  grid-column: 2 / span 2;
+  grid-row: 2 / span 3;
+  margin-top: 0;
+  margin-left: 15px;
+}
+.product__card-list .product__card-favorite {
+  opacity: 1;
+  bottom: 15px;
+}
+.product__card-box {
   width: 235px;
   height: 320px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.14);
@@ -67,17 +124,18 @@ export default {
   flex-direction: column;
   transition: height 0.3s;
   position: relative;
+  cursor: pointer;
 }
-.product__card-image {
+.product__card-box .product__card-image {
   display: flex;
   justify-content: center;
 }
-.product__card-image img {
+.product__card-box .product__card-image img {
   width: 75%;
   height: 150px;
   object-fit: contain;
 }
-.product__card-info p {
+.product__card-box .product__card-info p {
   font-size: 1rem;
   display: flex;
   justify-content: space-between;
@@ -85,7 +143,7 @@ export default {
 .product__card-info p span {
   font-weight: 800;
 }
-.product__card-price {
+.product__card-box .product__card-price {
   margin-top: 10px;
   text-align: left;
 }
@@ -113,11 +171,11 @@ export default {
   font-weight: 700;
   cursor: pointer;
 }
-.product__card:hover .btn__card {
+.product__card-box:hover .btn__card {
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
-.product__card:hover {
+.product__card-box:hover {
   height: 375px;
   transition: all 0.3s ease-in-out;
 }
@@ -136,7 +194,7 @@ export default {
   background: none;
   cursor: pointer;
 }
-.product__card:hover .product__card-favorite {
+.product__card-box:hover .product__card-favorite {
   opacity: 1;
   transition: opacity 0.3s;
 }
