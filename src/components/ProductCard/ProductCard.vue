@@ -1,6 +1,6 @@
 <template>
   <div
-    class="product__card-list"
+    class="product__card-box"
     v-for="product in products"
     v-bind:key="product.id"
   >
@@ -16,7 +16,7 @@
     </div>
     <div class="product__card-price">
       <p class="sale">${{product.price}}</p>
-      <p>${{Math.floor(product.price - (product.price / 100 * product.sale))}}</p>
+      <p>${{Math.floor(product.price - (product.price / 100 * product.discountPercentage))}}</p>
     </div>
     <button class="btn__card">
       <i class="pi pi-shopping-cart" style="font-size: 1rem; color: #0156FF; margin-right: 7px;" />
@@ -35,22 +35,10 @@ export default {
   components: {
     Rating
   },
-  data () {
-    return {
-      products: [
-        {
-          id: 1,
-          thumbnail: 'https://i.dummyjson.com/data/products/1/1.jpg',
-          brand: 'Apple',
-          category: 'smartphones',
-          description: 'An apple mobile which is nothing like apple',
-          price: 549,
-          rating: 4.69,
-          stock: 94,
-          sale: 12.96,
-          title: 'iPhone 8'
-        }
-      ]
+  props: {
+    products: {
+      type: Array,
+      required: true
     }
   }
 }
@@ -70,13 +58,21 @@ export default {
   position: relative;
   cursor: pointer;
   max-width: 75rem;
+  max-height: 21rem;
+  margin: 10px;
+  transition: all 0.3s ease-in-out;
 }
 .product__card-list .product__card-image {
   grid-area: image;
+  overflow: hidden;
 }
 .product__card-list .product__card-image img {
   object-fit: cover;
   width: 100%;
+}
+.product__card-list:hover .product__card-image img {
+  scale: 1.1;
+  transition: all 0.3s ease-in-out;
 }
 .product__card-list .product__card-rating {
   grid-area: rating;
@@ -85,11 +81,16 @@ export default {
 .product__card-list .product__card-info {
   grid-area: info;
   padding: 10px;
+  margin-bottom: 55px;
 }
 .product__card-list .product__card-info p {
   display: flex;
   justify-content: space-between;
   font-size: 1.3rem;
+}
+.product__card-list .product__card-info p span {
+  font-size: 1rem;
+  text-transform: capitalize;
 }
 @media (max-width: 850px) {
   .product__card-list .product__card-info p {
@@ -125,6 +126,7 @@ export default {
   transition: height 0.3s;
   position: relative;
   cursor: pointer;
+  margin: 10px;
 }
 .product__card-box .product__card-image {
   display: flex;
@@ -136,12 +138,16 @@ export default {
   object-fit: contain;
 }
 .product__card-box .product__card-info p {
-  font-size: 1rem;
+  font-size: 0.8rem;
   display: flex;
   justify-content: space-between;
 }
 .product__card-info p span {
   font-weight: 800;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-left: 20px;
 }
 .product__card-box .product__card-price {
   margin-top: 10px;
