@@ -60,7 +60,7 @@ export default {
 footer {
   width: 100%;
   background: #020203;
-  height: 450px;
+  height: 350px;
   padding: 10px 40px;
 }
 .subscribe__block {
