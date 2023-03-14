@@ -30,6 +30,9 @@ export default {
   transition: .1s linear;
   outline: none;
 }
+.search:hover {
+  background: #ebebeb;
+}
 .search-container::-webkit-input-placeholder {
   color: #b3b3b3;
 }
