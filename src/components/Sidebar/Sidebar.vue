@@ -5,38 +5,38 @@
       :class="[showMenuCategory ? 'sidebar__category hide__category' : 'sidebar__category']"
       @click="showMenuCategories"
     >
-      <div :class="[showMenuCategory ? 'sidebar__heading hide' : 'sidebar__heading']">
-        Category
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-chevron-up"
+        <div :class="[showMenuCategory ? 'sidebar__heading hide' : 'sidebar__heading']">
+          Category
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-chevron-up"
+          >
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        </div>
+        <div
+          class="sidebar__options"
+          v-for="category in categories"
+          v-bind:key="category"
         >
-          <polyline points="18 15 12 9 6 15"></polyline>
-        </svg>
-      </div>
-      <div
-        class="sidebar__options"
-        v-for="category in categories"
-        v-bind:key="category"
-      >
-        <label class="check">
-          <input type="checkbox" class="check__input">
-          <span class="check__checkbox">
-            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 6.5L9 17.5L4 12.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <p class="check__text">{{category}}</p>
-        </label>
-      </div>
+          <label class="check">
+            <input type="checkbox" class="check__input">
+            <span class="check__checkbox">
+              <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6.5L9 17.5L4 12.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <p class="check__text">{{category}}</p>
+          </label>
+        </div>
     </div>
 
     <div

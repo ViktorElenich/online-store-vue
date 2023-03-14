@@ -1,6 +1,7 @@
 <template>
   <div class="products__page">
     <Sidebar :products="products" />
+    <Filters />
     <div class="products__container">
       <ProductCard
         :products="products"
@@ -18,8 +19,10 @@ import { db } from '@/firebase/config'
 import ProductCard from '@/components/ProductCard/ProductCard.vue'
 import Loader from '@/components/Loader/Loader.vue'
 import Sidebar from '@/components/Sidebar/Sidebar.vue'
+import Filters from '@/components/Filters/Filters.vue'
 @Options({
   components: {
+    Filters,
     Sidebar,
     ProductCard,
     Loader
@@ -55,12 +58,12 @@ export default class ProductsView extends Vue {}
 <style scoped>
 .products__page {
   display: grid;
-  grid-template-areas: 'sidebar products';
+  grid-template-areas: 'sidebar filters' 'sidebar products';
   grid-template-columns: 16rem 1fr;
 }
 .products__container {
   width: 100%;
-  padding: 10px;
+  padding: 10px 40px;
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
   justify-items: center;

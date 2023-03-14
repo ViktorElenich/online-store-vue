@@ -1,31 +1,33 @@
 <template>
-  <div
-    class="product__card-box"
-    v-for="product in products"
-    v-bind:key="product.id"
-  >
-    <div class="product__card-image">
-      <img :src="product.thumbnail" :alt="product.brand">
+  <transition-group name="product">
+    <div
+      class="product__card-box"
+      v-for="product in products"
+      v-bind:key="product.id"
+    >
+      <div class="product__card-image">
+        <img :src="product.thumbnail" :alt="product.brand">
+      </div>
+      <div class="product__card-rating">
+        <Rating :max="5" :current="product.rating" />
+      </div>
+      <div class="product__card-info">
+        <p>Model: <span>{{product.title}}</span></p>
+        <p>Brand: <span>{{product.brand}}</span></p>
+      </div>
+      <div class="product__card-price">
+        <p class="sale">${{product.price}}</p>
+        <p>${{Math.floor(product.price - (product.price / 100 * product.discountPercentage))}}</p>
+      </div>
+      <button class="btn__card">
+        <i class="pi pi-shopping-cart" style="font-size: 1rem; color: #0156FF; margin-right: 7px;" />
+        Add To Cart
+      </button>
+      <button class="product__card-favorite">
+        <i class="pi pi-heart" style="font-size: 1rem" />
+      </button>
     </div>
-    <div class="product__card-rating">
-      <Rating :max="5" :current="product.rating" />
-    </div>
-    <div class="product__card-info">
-      <p>Model: <span>{{product.title}}</span></p>
-      <p>Brand: <span>{{product.brand}}</span></p>
-    </div>
-    <div class="product__card-price">
-      <p class="sale">${{product.price}}</p>
-      <p>${{Math.floor(product.price - (product.price / 100 * product.discountPercentage))}}</p>
-    </div>
-    <button class="btn__card">
-      <i class="pi pi-shopping-cart" style="font-size: 1rem; color: #0156FF; margin-right: 7px;" />
-      Add To Cart
-    </button>
-    <button class="product__card-favorite">
-      <i class="pi pi-heart" style="font-size: 1rem" />
-    </button>
-  </div>
+  </transition-group>
 </template>
 
 <script>
@@ -203,5 +205,18 @@ export default {
 .product__card-box:hover .product__card-favorite {
   opacity: 1;
   transition: opacity 0.3s;
+}
+.product-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.product-enter-active,
+.product-leave-active {
+  transition: all 1s ease;
+}
+.product-enter-from,
+.product-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
