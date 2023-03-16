@@ -14,12 +14,11 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import { collection, getDocs } from '@firebase/firestore'
-import { db } from '@/firebase/config'
 import ProductCard from '@/components/ProductCard/ProductCard.vue'
 import Loader from '@/components/Loader/Loader.vue'
 import Sidebar from '@/components/Sidebar/Sidebar.vue'
 import Filters from '@/components/Filters/Filters.vue'
+import { mapActions, mapGetters } from 'vuex'
 @Options({
   components: {
     Filters,
@@ -27,28 +26,19 @@ import Filters from '@/components/Filters/Filters.vue'
     ProductCard,
     Loader
   },
-  data () {
-    return {
-      products: [],
-      isProductsLoading: false
-    }
-  },
   methods: {
-    async fetchProducts () {
-      try {
-        this.isProductsLoading = true
-        const querySnapshot = await getDocs(collection(db, 'products'))
-        querySnapshot.forEach((doc) => {
-          this.products.push(doc.data())
-        })
-        this.isProductsLoading = false
-      } catch (e) {
-        throw new Error(e as string)
-      }
-    }
+    ...mapActions({
+      fetchProducts: 'products/fetchProducts'
+    })
   },
   mounted () {
     this.fetchProducts()
+  },
+  computed: {
+    ...mapGetters({
+      products: 'products/products',
+      isProductsLoading: 'products/isProductsLoading'
+    })
   }
 })
 export default class ProductsView extends Vue {}
