@@ -1,6 +1,6 @@
 <template>
   <div class="products__page">
-    <Sidebar :products="products" />
+    <Sidebar :products="products" v-if="!isProductsLoading" />
     <Filters />
     <div class="products__container">
       <ProductCard

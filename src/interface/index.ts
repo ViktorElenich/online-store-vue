@@ -15,7 +15,8 @@ export interface IProducts {
 }
 export interface State {
   products: IProducts[],
-  isProductsLoading: boolean
+  isProductsLoading: boolean,
+  categories: Array<string>
 }
 export interface Commit {
   (type: string, payload?: any, options?: CommitOptions): void;
